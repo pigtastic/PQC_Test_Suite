@@ -15,8 +15,8 @@ logger.add(sys.stderr, format="{time} {level} {message}", filter="kem-test-suite
 
 kems = oqs.get_enabled_KEM_mechanisms()
 
-# print("Enabled KEM mechanisms:")
-# pprint(kems, compact="True")
+print("Enabled KEM mechanisms:")
+pprint(kems, compact="True")
 
 mcelise = 'Classic-McEliece-348864'
 saber = 'Saber-KEM'
@@ -25,7 +25,7 @@ kyper = 'Kyber512'
 # CONFIG
 kemalg = saber
 iterations = 100000
-proz = iterations / 10
+
 
 # FILE WRITER
 system = platform.system()
@@ -48,10 +48,11 @@ with oqs.KeyEncapsulation(kemalg) as client:
         logger.info("Test start...")
 
         i = 0
+        proz = iterations / 10
         while i <= iterations:
             i = i + 1
 
-
+            
             if i % proz == 0:
                 logger.info(str(i / iterations * 100) + "%")
 
