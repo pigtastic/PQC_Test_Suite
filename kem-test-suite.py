@@ -15,8 +15,8 @@ logger.add(sys.stderr, format="{time} {level} {message}", filter="kem-test-suite
 
 kems = oqs.get_enabled_KEM_mechanisms()
 
-print("Enabled KEM mechanisms:")
-pprint(kems, compact="True")
+# print("Enabled KEM mechanisms:")
+# pprint(kems, compact="True")
 
 mcelise = 'Classic-McEliece-348864'
 saber = 'Saber-KEM'
