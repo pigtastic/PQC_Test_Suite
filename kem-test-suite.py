@@ -6,6 +6,7 @@ from loguru import logger
 import sys
 from datetime import datetime
 import platform
+import time
 
 logger.add(sys.stderr, format="{time} {level} {message}", filter="kem-test-suite.py", level="INFO")
 
@@ -20,57 +21,126 @@ kems = oqs.get_enabled_KEM_mechanisms()
 
 mcelise = 'Classic-McEliece-348864'
 saber = 'Saber-KEM'
+lightsaber = 'LightSaber-KEM'
+firesaber = 'FireSabber-KEM'
 kyper = 'Kyber512'
 
-# CONFIG
-kemalg = saber
-iterations = 100000
-
-
-# FILE WRITER
+algos = [mcelise, saber, kyper]
+iterations = 1000
 system = platform.system()
 platform = platform.platform()
-filename = kemalg + "-" + system + "-" + platform + ".csv"
 
-file = open("logs/" + filename, "a")
-logger.info("Open logfile: " + filename)
+def prepWriter(writer):
+    writer.write(system)
+    writer.write(";")
+    writer.write(platform)
+    writer.write(";")    
 
-file.write(system)
-file.write(";")
-file.write(platform)
-file.write(";")
+for algo in kems: 
+    if algo != "DEFAULT":
+        logger.info("################# " + algo + " #################")
 
-with oqs.KeyEncapsulation(kemalg) as client:
-    with oqs.KeyEncapsulation(kemalg) as server:
+        # FILE WRITERS
 
-        logger.info("Selected algorithm: " + kemalg)
-        logger.info("Number of iterations " + str(iterations))
-        logger.info("Test start...")
+        filename = algo + "" + ".csv"
 
-        i = 0
-        proz = iterations / 10
-        while i <= iterations:
-            i = i + 1
+        file_decap = open("logs/decap/" + filename, "a")
+        file_encap = open("logs/encap/" + filename, "a")
+        file_cap = open("logs/cap/" + filename, "a")
+        file_roundtrip = open("logs/roundtrip/" + filename, "a")
+        file_keygen = open("logs/keygen/" + filename, "a")
 
-            
-            if i % proz == 0:
-                logger.info(str(i / iterations * 100) + "%")
+        prepWriter(file_decap)
+        prepWriter(file_encap)
+        prepWriter(file_cap)
+        prepWriter(file_keygen)
+        prepWriter(file_roundtrip)
 
-            # client generates its keypair
-            public_key = client.generate_keypair()
+        logger.info("Open logfiles: " + filename)
 
-            # the server encapsulates its secret using the client's public key
-            first = datetime.now()
+        with oqs.KeyEncapsulation(algo) as client:
+            with oqs.KeyEncapsulation(algo) as server:
 
-            ciphertext, shared_secret_server = server.encap_secret(public_key)
-            shared_secret_client = client.decap_secret(ciphertext)
+                
+                logger.info("Iterations " + str(iterations))
+                logger.info("Test start...")
 
-            second = datetime.now()
-            dif = second - first
+                i = 0
+                while i <= iterations:
+                    i = i + 1
 
-            if shared_secret_client == shared_secret_server:
-                file.write(str(dif.microseconds) + ";")
+                    # output of progress in %
+                    if i % (iterations / 10) == 0:
+                        logger.info(str(i / iterations * 100) + "%")
 
-file.write("\n")
-logger.info("Test done!")
-file.close()
+                    # FIRST time
+                    first = datetime.now()
+
+                    # client generates its keypair
+                    public_key = client.generate_keypair()
+
+                    # KEYGEN duration
+                    second = datetime.now()
+                    dif = second - first
+                    file_keygen.write(str(dif.microseconds) + ";")
+
+                    # ENCAP
+                    ciphertext, shared_secret_server = server.encap_secret(public_key)
+
+                    # ENCAP duration
+                    third = datetime.now()
+                    dif = third - second
+                    file_encap.write(str(dif.microseconds) + ";")
+
+
+                    # DECAP
+                    shared_secret_client = client.decap_secret(ciphertext)
+
+                    # DECAP duration
+                    fourth = datetime.now()
+                    dif = fourth - third
+                    file_decap.write(str(dif.microseconds) + ";")
+
+                    # CAP duration
+                    dif = fourth - second
+                    if shared_secret_client == shared_secret_server:
+                        file_cap.write(str(dif.microseconds) + ";")
+                    else:
+                        file_cap.write("0" + ";")
+
+                    # ROUNDTRIP duration
+                    dif = fourth - first
+                    if shared_secret_client == shared_secret_server:
+                        file_roundtrip.write(str(dif.microseconds) + ";")
+                    else:
+                        file_roundtrip.write("0" + ";")
+
+
+        file_decap.write("\n")
+        file_encap.write("\n")
+        file_keygen.write("\n")
+        file_roundtrip.write("\n")
+        file_cap.write("\n")
+        
+        logger.info("Test done!\n")
+
+        file_decap.close()
+        file_encap.close()
+        file_cap.close()
+        file_keygen.close()
+        file_roundtrip.close()
+        
+
+        logger.info("Sleep 60 seconds to cool down cpu...")
+        time.sleep(20)
+        logger.info("40...")
+        time.sleep(20)
+        logger.info("20...")
+        time.sleep(20)
+        logger.info("##########################################\n")
+
+
+
+
+
+
