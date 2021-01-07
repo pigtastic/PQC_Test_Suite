@@ -31,7 +31,7 @@ def prepWriter(writer):
     writer.write(";")
 
 
-counter = 0
+counter = 1
 for algo in kems:
     if algo != "DEFAULT":
         logger.info("################# " + algo + " (" + str(counter) + "/" +
@@ -126,10 +126,10 @@ for algo in kems:
         file_roundtrip.close()
 
         counter = counter + 1
-        logger.info("Sleep 60 seconds to cool down cpu...")
-        time.sleep(20)
-        logger.info("40...")
-        time.sleep(20)
-        logger.info("20...")
-        time.sleep(20)
-        logger.info("##########################################\n")
+        # logger.info("Sleep 60 seconds to cool down cpu...")
+        # time.sleep(20)
+        # logger.info("40...")
+        # time.sleep(20)
+        # logger.info("20...")
+        # time.sleep(20)
+        # logger.info("##########################################\n")
