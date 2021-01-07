@@ -8,7 +8,10 @@ from datetime import datetime
 import platform
 import time
 
-logger.add(sys.stderr, format="{time} {level} {message}", filter="kem-test-suite.py", level="INFO")
+logger.add(sys.stderr,
+           format="{time} {level} {message}",
+           filter="kem-test-suite.py",
+           level="INFO")
 
 #######################################################################
 # KEM test suite
@@ -16,29 +19,23 @@ logger.add(sys.stderr, format="{time} {level} {message}", filter="kem-test-suite
 
 kems = oqs.get_enabled_KEM_mechanisms()
 
-# print("Enabled KEM mechanisms:")
-# pprint(kems, compact="True")
-
-mcelise = 'Classic-McEliece-348864'
-saber = 'Saber-KEM'
-lightsaber = 'LightSaber-KEM'
-firesaber = 'FireSabber-KEM'
-kyper = 'Kyber512'
-
-algos = [mcelise, saber, kyper]
 iterations = 1000
 system = platform.system()
 platform = platform.platform()
+
 
 def prepWriter(writer):
     writer.write(system)
     writer.write(";")
     writer.write(platform)
-    writer.write(";")    
+    writer.write(";")
 
-for algo in kems: 
+
+counter = 0
+for algo in kems:
     if algo != "DEFAULT":
-        logger.info("################# " + algo + " #################")
+        logger.info("################# " + algo + " (" + str(counter) + "/" +
+                    str(len(kems)) + ")" + " #################")
 
         # FILE WRITERS
 
@@ -61,7 +58,6 @@ for algo in kems:
         with oqs.KeyEncapsulation(algo) as client:
             with oqs.KeyEncapsulation(algo) as server:
 
-                
                 logger.info("Iterations " + str(iterations))
                 logger.info("Test start...")
 
@@ -85,13 +81,13 @@ for algo in kems:
                     file_keygen.write(str(dif.microseconds) + ";")
 
                     # ENCAP
-                    ciphertext, shared_secret_server = server.encap_secret(public_key)
+                    ciphertext, shared_secret_server = server.encap_secret(
+                        public_key)
 
                     # ENCAP duration
                     third = datetime.now()
                     dif = third - second
                     file_encap.write(str(dif.microseconds) + ";")
-
 
                     # DECAP
                     shared_secret_client = client.decap_secret(ciphertext)
@@ -115,13 +111,12 @@ for algo in kems:
                     else:
                         file_roundtrip.write("0" + ";")
 
-
         file_decap.write("\n")
         file_encap.write("\n")
         file_keygen.write("\n")
         file_roundtrip.write("\n")
         file_cap.write("\n")
-        
+
         logger.info("Test done!\n")
 
         file_decap.close()
@@ -129,8 +124,8 @@ for algo in kems:
         file_cap.close()
         file_keygen.close()
         file_roundtrip.close()
-        
 
+        counter = counter + 1
         logger.info("Sleep 60 seconds to cool down cpu...")
         time.sleep(20)
         logger.info("40...")
@@ -138,9 +133,3 @@ for algo in kems:
         logger.info("20...")
         time.sleep(20)
         logger.info("##########################################\n")
-
-
-
-
-
-
