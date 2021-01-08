@@ -19,8 +19,7 @@ logger.add(sys.stderr,
 
 # kems = oqs.get_enabled_KEM_mechanisms()
 
-kems = ['SIDH-p434',
- 'SIDH-p503', 'SIDH-p610', 'SIDH-p751', 'SIDH-p434-compressed',
+kems = ['SIDH-p751', 'SIDH-p434-compressed',
  'SIDH-p503-compressed', 'SIDH-p610-compressed', 'SIDH-p751-compressed',
  'SIKE-p434', 'SIKE-p503', 'SIKE-p610', 'SIKE-p751', 'SIKE-p434-compressed',
  'SIKE-p503-compressed', 'SIKE-p610-compressed', 'SIKE-p751-compressed']
