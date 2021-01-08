@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 kem-test-suite.py
+nohub python3 kem-test-suite.py &
