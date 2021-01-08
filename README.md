@@ -1,5 +1,5 @@
 # PQC_Test_Suite
-## Voraussetzungen 
+## Voraussetzung 
 https://github.com/open-quantum-safe/liboqs-python
 
 ### Installation
