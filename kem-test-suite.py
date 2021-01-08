@@ -19,14 +19,7 @@ logger.add(sys.stderr,
 
 # kems = oqs.get_enabled_KEM_mechanisms()
 
-kems = [ 'Classic-McEliece-6960119', 'Classic-McEliece-6960119f',
- 'Classic-McEliece-8192128', 'Classic-McEliece-8192128f', 'HQC-128', 'HQC-192',
- 'HQC-256', 'Kyber512', 'Kyber768', 'Kyber1024', 'Kyber512-90s', 'Kyber768-90s',
- 'Kyber1024-90s', 'NTRU-HPS-2048-509', 'NTRU-HPS-2048-677', 'NTRU-HPS-4096-821',
- 'NTRU-HRSS-701', 'ntrulpr653', 'ntrulpr761', 'ntrulpr857', 'sntrup653',
- 'sntrup761', 'sntrup857', 'LightSaber-KEM', 'Saber-KEM', 'FireSaber-KEM',
- 'FrodoKEM-640-AES', 'FrodoKEM-640-SHAKE', 'FrodoKEM-976-AES',
- 'FrodoKEM-976-SHAKE', 'FrodoKEM-1344-AES', 'FrodoKEM-1344-SHAKE', 'SIDH-p434',
+kems = ['SIDH-p434',
  'SIDH-p503', 'SIDH-p610', 'SIDH-p751', 'SIDH-p434-compressed',
  'SIDH-p503-compressed', 'SIDH-p610-compressed', 'SIDH-p751-compressed',
  'SIKE-p434', 'SIKE-p503', 'SIKE-p610', 'SIKE-p751', 'SIKE-p434-compressed',
