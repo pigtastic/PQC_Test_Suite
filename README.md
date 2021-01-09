@@ -20,7 +20,7 @@
 Für das gesamte logfile
 > cat nohup.out
 
-Nur die letzten 16 Zeilen
-> tail -n 16 nohup.out
+Nur die letzten 22 Zeilen
+> tail -n 22 nohup.out
 
 
