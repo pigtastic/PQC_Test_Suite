@@ -13,7 +13,7 @@
 
 #### Im Hintergrund ausführen
 
-> nohub python3 kem-test-suite.py  &
+> nohup python3 kem-test-suite.py  &
 
 ##### Ausgabe des Fortschritts
 
