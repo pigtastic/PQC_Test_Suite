@@ -19,18 +19,15 @@ logger.add(sys.stderr,
 
 # kems = oqs.get_enabled_KEM_mechanisms()
 
-kems = ['BIKE1-L1-CPA', 'BIKE1-L3-CPA', 'BIKE1-L1-FO', 'BIKE1-L3-FO',
- 'Classic-McEliece-348864', 'Classic-McEliece-348864f',
+kems = ['Classic-McEliece-348864', 'Classic-McEliece-348864f',
  'Classic-McEliece-460896', 'Classic-McEliece-460896f',
  'Classic-McEliece-6688128', 'Classic-McEliece-6688128f',
  'Classic-McEliece-6960119', 'Classic-McEliece-6960119f',
- 'Classic-McEliece-8192128', 'Classic-McEliece-8192128f', 'HQC-128', 'HQC-192',
- 'HQC-256', 'Kyber512', 'Kyber768', 'Kyber1024', 'Kyber512-90s', 'Kyber768-90s',
+ 'Classic-McEliece-8192128', 'Classic-McEliece-8192128f', 
+ 'Kyber512', 'Kyber768', 'Kyber1024', 'Kyber512-90s', 'Kyber768-90s',
  'Kyber1024-90s', 'NTRU-HPS-2048-509', 'NTRU-HPS-2048-677', 'NTRU-HPS-4096-821',
  'NTRU-HRSS-701', 'ntrulpr653', 'ntrulpr761', 'ntrulpr857', 'sntrup653',
- 'sntrup761', 'sntrup857', 'LightSaber-KEM', 'Saber-KEM', 'FireSaber-KEM',
- 'FrodoKEM-640-AES', 'FrodoKEM-640-SHAKE', 'FrodoKEM-976-AES',
- 'FrodoKEM-976-SHAKE', 'FrodoKEM-1344-AES', 'FrodoKEM-1344-SHAKE']
+ 'sntrup761', 'sntrup857', 'LightSaber-KEM', 'Saber-KEM', 'FireSaber-KEM']
 
 iterations = 1000
 system = platform.system()
