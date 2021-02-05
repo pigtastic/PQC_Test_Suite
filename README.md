@@ -10,7 +10,6 @@
 
 > python3 kem-test-suite.py
 
-
 #### Im Hintergrund ausführen
 
 > nohup python3 kem-test-suite.py  &
@@ -20,7 +19,7 @@
 Für das gesamte logfile
 > cat nohup.out
 
-Nur die letzten 22 Zeilen
-> tail -n 22 nohup.out
+An Ausgabe wieder anhängen.
+> tail -f (anzahl letzte Zeilen) nohup.out
 
 
