@@ -13,7 +13,9 @@
 ### Im Hintergrund ausführen
 
 > nohup python3 kem-test-suite.py &!
+
 oder
+
 > ./run-tests.sh
 
 ### Ausgabe des Fortschritts
