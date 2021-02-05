@@ -12,15 +12,10 @@
 
 ### Im Hintergrund ausführen
 
-```console
-nohup python3 kem-test-suite.py &!
-```
-
+> nohup python3 kem-test-suite.py &!
 oder
+> ./run-tests.sh
 
-```console
-./run-tests.sh
-```
 ### Ausgabe des Fortschritts
 
 Für das gesamte logfile
