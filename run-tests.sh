@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nohup python3 kem-test-suite.py &
+nohup python3 kem-test-suite.py &!
