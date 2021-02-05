@@ -12,7 +12,9 @@
 
 ### Im Hintergrund ausführen
 
-> nohup python3 kem-test-suite.py &!
+```console
+nohup python3 kem-test-suite.py &!
+```
 
 oder
 
