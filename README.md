@@ -24,7 +24,7 @@ Für das gesamte logfile
 > cat nohup.out
 
 An Ausgabe wieder anhängen.
-> tail -f (anzahl letzte Zeilen) nohup.out
+> tail -f (Anzahl letzte Zeilen) nohup.out
 
 ### Ergebnisse 
 Die Ergebnisse des Tests sind unter `logs` zu finden
