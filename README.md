@@ -20,7 +20,7 @@ oder
 
 ### Ausgabe des Fortschritts
 
-Für das gesamte logfile
+Für das gesamte Logfile
 > cat nohup.out
 
 An Ausgabe wieder anhängen.
